@@ -1,15 +1,16 @@
 import React from 'react'
 
+import GlucoseReading from '../GlucoseReadings'
+
 const App = () => {
   return (
-    <>
-    <header>
-      <h1>Pet Tracker</h1>
-    </header>
+    <div>
+      <header>App Header</header>
       <main>
-        App
+        <GlucoseReading />
       </main>
-    </>
+      <footer>App Footer</footer>
+    </div>
   )
 }
 
