@@ -1,17 +1,16 @@
 import React from 'react'
 
-import PetList from '../PetList'
+import GlucoseReading from '../GlucoseReadings'
 
 const App = () => {
   return (
-    <>
-      <header>
-        <h1>Pet Tracker</h1>
-      </header>
+    <div>
+      <header>App Header</header>
       <main>
-        <PetList />
+        <GlucoseReading />
       </main>
-    </>
+      <footer>App Footer</footer>
+    </div>
   )
 }
 
