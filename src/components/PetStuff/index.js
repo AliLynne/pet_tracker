@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../Firebase/firebase'
-import { DateTime } from 'luxon'
 import moment from 'moment'
+
+import GlucoseForm from '../GlucoseForm'
+
+import './petStuff.scss'
 
 const Index = ({ pet }) => {
   const [readings, setReadings] = useState([])
@@ -34,8 +37,8 @@ const Index = ({ pet }) => {
 
   return (
     <div className="pet-stuff">
-      <p>Glucose Readings for {name}</p>
-      <p>
+      <GlucoseForm pet={pet} />
+      {/* <p>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <span>Loading...</span>}
       </p>
@@ -54,7 +57,7 @@ const Index = ({ pet }) => {
               </li>
             )
           })}
-      </ul>
+      </ul> */}
     </div>
   )
 }

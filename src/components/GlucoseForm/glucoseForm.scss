@@ -1,0 +1,25 @@
+.glucose-form {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    margin: 0.3rem 1rem;
+    font-size: 2rem;
+  }
+
+  &__input {
+    font-size: 1.3rem;
+    margin: 1rem;
+    height: 3rem;
+  }
+
+  &__submit {
+    margin: 1rem;
+    font-size: 2rem;
+  }
+}

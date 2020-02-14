@@ -1,19 +1,29 @@
-/// <reference types="cypress" />
+/// <reference types="Cypress" />
 
-import { navigate, addPet, addDate, addReading, submitForm, validateSubmit } from '../page-objects/glucose-page'
+import {
+  navigate,
+  addPetName,
+  addDate,
+  addReading,
+  submitForm,
+  validateSubmit
+} from '../page-objects/glucose-page'
 
 describe('App Basics', () => {
   it('Visits the app, checks the title', () => {
-    navigate()
+    navigate('/')
     cy.title().should('eq', 'Pet Tracker')
   })
 })
 
 describe('Glucose Reading', () => {
+  beforeEach(() => {
+    navigate('/')
+  })
   it('can enter and save a glucose reading', () => {
-    addPet('kitty')
-    addDate('2020-01-01')
-    addReading('.glucose-input', '230')
-    validateSubmit('#glucose-form')
+    cy.get('#glucose-form-r9j7nL6fvsyoDNjJ3APW-pet').type('Sammy')
+    cy.get('#glucose-form-r9j7nL6fvsyoDNjJ3APW-date').type('12/12/2020')
+    cy.get('#glucose-form-r9j7nL6fvsyoDNjJ3APW-reading').type(510)
+    cy.get('#glucose-form-r9j7nL6fvsyoDNjJ3APW__submit').click()
   })
 })

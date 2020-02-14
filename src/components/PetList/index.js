@@ -68,16 +68,6 @@ const Index = () => {
             </TabPanel>
           )
         })}
-      {/* <ul>
-        {pets &&
-          pets.map(pet => {
-            return (
-              <li key={pet.id}>
-                <Link to={`/pets/${pet.name}`}>{pet.name}</Link>
-              </li>
-            )
-          })}
-      </ul> */}
     </>
   )
 }

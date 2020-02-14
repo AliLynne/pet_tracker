@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import axe from 'react-axe'
 
-import './index.css'
+import './index.scss'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 
