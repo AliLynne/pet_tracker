@@ -1,50 +1,59 @@
 import React, { useState, useEffect } from 'react'
-
-import firebase from '../Firebase/firebase'
-const db = firebase.firestore()
+import { db } from '../Firebase/firebase'
+import { DateTime } from 'luxon'
+import moment from 'moment'
 
 const Index = ({ pet }) => {
   const [readings, setReadings] = useState([])
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-
-  const glucoseReadingsDB = db.collection('glucoseReadings')
-  const petRef = db.collection('pets').doc(pet)
+  const { id, name } = pet
 
   useEffect(() => {
     setLoading(true)
-    glucoseReadingsDB
+    console.log('effect', id)
+    const unsub = db
+      .collection('glucoseReadings')
+      .where('petId', '==', id)
       .get()
-      .then(docs => {
-        const glucoseReadings = []
-        docs.forEach(doc => {
-          glucoseReadings.push({
-            id: doc.id,
-            data: doc.data()
-          })
-        })
+      .then(snapshot => {
+        const allReadings = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        console.log(allReadings)
+        setReadings(allReadings)
         setLoading(false)
-        setReadings(glucoseReadings)
       })
-      .catch(err => setError(err))
-  }, [])
+    return () => {
+      console.log('cleanup')
+      unsub()
+    }
+  }, [id])
 
   return (
-    <div>
-      <p>Glucose Readings</p>
+    <div className="pet-stuff">
+      <p>Glucose Readings for {name}</p>
       <p>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <span>Loading...</span>}
       </p>
       <ul>
         {readings &&
-          readings.map(reading => (
-            <li key={reading.id}>
-              <p>Pet: {reading.data.pet.get().then(res => console.log(res))}</p>
-              <p>Date: {reading.data.date.toDate().toString()}</p>
-              <p>Blood Glucose: {reading.data.reading}</p>
-            </li>
-          ))}
+          readings.map(reading => {
+            return (
+              <li key={reading.id}>
+                <p>
+                  Date:{' '}
+                  {moment(reading.date.toDate().toString()).format(
+                    'MMM DD, YYYY HH:mm A'
+                  )}
+                </p>
+                <p>Blood Glucose: {reading.reading}</p>
+              </li>
+            )
+          })}
       </ul>
     </div>
   )

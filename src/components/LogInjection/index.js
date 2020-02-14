@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../Firebase/firebase'
 
-const GlucoseReading = () => {
+const LogInjection = () => {
   const initialValues = {
     petname: '',
     date: '',
     time: '',
-    reading: ''
+    units: ''
   }
 
   const [values, setValues] = useState({ ...initialValues })
@@ -32,10 +32,10 @@ const GlucoseReading = () => {
     const { date, time } = values
 
     const timestamp = new Date(`${date} ${time}`)
-    db.collection('glucoseReadings').add({
+    db.collection('injections').add({
       petname: values.petname,
       date: timestamp,
-      reading: values.reading
+      units: values.units
     })
     setValues({ ...initialValues })
   }
@@ -46,25 +46,19 @@ const GlucoseReading = () => {
 
   return (
     <div>
-      <form id="glucose-form" onSubmit={e => submitForm(e)}>
+      <form id="injection-form" onSubmit={e => submitForm(e)}>
         <label>
           Pet:
-          <select id="petname">
+          <select id="petname" name="petname" onChange={handleChange}>
             {pets &&
               pets.map(pet => {
-                return <option value={pet.name}>{pet.name}</option>
+                return (
+                  <option key={pet.id} value={pet.name}>
+                    {pet.name}
+                  </option>
+                )
               })}
           </select>
-          {/* <input
-            className="pet-name-input"
-            type="text"
-            name="petname"
-            id="petname"
-            value={values.petname}
-            onChange={handleChange}
-            placeholder="Fluffy"
-            //required
-          /> */}
         </label>
         <label>
           Date:
@@ -89,15 +83,16 @@ const GlucoseReading = () => {
           />
         </label>
         <label>
-          Glucose Reading:
+          Quantity:
           <input
             className="glucose-input"
             type="number"
-            name="reading"
-            id="reading"
-            value={values.reading}
+            name="units"
+            id="units"
+            value={values.units}
             onChange={handleChange}
           />
+          units
         </label>
         <button type="submit">Submit</button>
       </form>
@@ -105,4 +100,4 @@ const GlucoseReading = () => {
   )
 }
 
-export default GlucoseReading
+export default LogInjection
