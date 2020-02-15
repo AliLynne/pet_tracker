@@ -1,5 +1,26 @@
 .pet-stuff {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 1px solid black;
   border-radius: 20px;
   padding: 2rem;
+}
+
+.add-glucose-button,
+.add-injection-button {
+  font-size: 2rem;
+  border-radius: 2rem;
+  padding: 1rem;
+  width: 50%;
+  &[aria-expanded='true'] {
+    background-color: #ca5590;
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+.add-glucose-button {
+  margin-bottom: 1rem;
 }

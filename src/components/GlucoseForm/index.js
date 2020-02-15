@@ -83,6 +83,8 @@ const GlucoseForm = ({ pet }) => {
         className="glucose-form__input"
       />
       <FormMessage {...form} name="pet" className="glucose-form__message" />
+      <FormMessage {...form} name="reading" className="glucose-form__message" />
+      <FormMessage {...form} name="date" className="glucose-form__message" />
       <FormSubmitButton
         {...form}
         id={`glucose-form-${pet.id}__submit`}

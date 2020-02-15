@@ -5,6 +5,7 @@ import PetStuff from '../PetStuff'
 import { db } from '../Firebase/firebase'
 
 import './petList.scss'
+import '../Buttons/buttonStyles.scss'
 
 const Index = () => {
   const [pets, setPets] = useState(null)
